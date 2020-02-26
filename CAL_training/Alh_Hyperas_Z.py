@@ -80,8 +80,8 @@ def data():
   train_dataset = smalldataset.sample(frac=0.8,random_state=0) #Split into training/testing
   test_dataset = smalldataset.drop(train_dataset.index)
 
-  train_labels = train_dataset.pop("Z")#Separate labels
-  test_labels = test_dataset.pop("Z")
+  train_labels = train_dataset.pop("ZHL")#Separate labels
+  test_labels = test_dataset.pop("ZHL")
   print(train_dataset)
   #Normalise dataset
   normed_train_data = (train_dataset.values - mean )/ deviation #normalise flux bands
