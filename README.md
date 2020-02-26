@@ -1,1 +1,4 @@
-This is my second project and I am trying to get git to work but I can't and aaaarrrgh
+This is my second PhD project.
+I'm using synthesised spectroscopic data to predict ages and metallicites for ALHAMBRA survey data.
+
+
