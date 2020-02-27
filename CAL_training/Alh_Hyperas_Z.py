@@ -72,7 +72,6 @@ def data():
 
   #Build dataset of galaxies
   GroupA = dataset.copy()
-  GroupA = GroupA.drop(columns = 'name') #Hyperas doesn't need gal id
 
   smalldataset1 = GroupA.sample(frac = 1, random_state = 0) #Randomise order
   smalldataset = smalldataset1.drop(columns = 'age') #ignore age for this NN
@@ -94,8 +93,8 @@ def data():
   test_dataset = test_dataset.drop(columns = 'name') #Hyperas doesn't need gal id
   train_dataset = train_dataset.drop(columns = 'name') #Hyperas doesn't need gal id
 
-  train_labels = train_dataset.pop("age")#Separate labels
-  test_labels = test_dataset.pop("age")
+  train_labels = train_dataset.pop("ZHL")#Separate labels
+  test_labels = test_dataset.pop("ZHL")
   print(train_dataset)
   #Normalise dataset
   normed_train_data = (train_dataset.values - mean )/ deviation #normalise flux bands
