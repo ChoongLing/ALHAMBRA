@@ -1,0 +1,26 @@
+These are the hyperparameters given by Hyperas when using CALIFA data
+Splitting in Set A split randomly by spaxel, 
+whereas Set B is defined as having all spaxels from 20% of the galaxies 
+in the testing set
+
+
+*****Age		Set A		Set B***********************
+
+1st layer: filters	33		20
+	   kernel	12		6
+2nd layer: filters	50		20
+	   kernel	10		8
+Pool size		2		8
+Dense units		30		40
+Batch size		64		128
+
+
+*****Z			Set A		Set B***********************
+
+1st layer: filters	35		60
+	   kernel	12		10
+2nd layer: filters	60		40
+	   kernel	6		12
+Pool size		8		6
+Dense units		30		35
+Batch size		32		128
