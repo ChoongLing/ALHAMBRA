@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import seaborn as sns
-
+import random
 
 
 tf.enable_eager_execution()
@@ -72,13 +72,27 @@ def data():
 
   #Build dataset of galaxies
   GroupA = dataset.copy()
-  GroupA = GroupA.drop(columns = 'name') #Hyperas doesn't need gal id
 
   smalldataset1 = GroupA.sample(frac = 1, random_state = 0) #Randomise order
   smalldataset = smalldataset1.drop(columns = 'ZHL') #ignore Z for this NN
   #split dataset into training & testing
-  train_dataset = smalldataset.sample(frac=0.8,random_state=0) #Split into training/testing
-  test_dataset = smalldataset.drop(train_dataset.index)
+  by_gal = True
+  if by_gal: #Set B splitting
+    Longlist = open('../NewGals.txt', 'r')
+    Longlist = [line.rstrip('\n') for line in Longlist]
+    num_gals = int(0.2*len(Longlist)) #20% of galaxies for testing
+    test_gals = random.choices(Longlist, k = num_gals) #Choose galaxies for testing
+    test_dataset = smalldataset.loc[smalldataset['name'].isin(test_gals)]
+    train_dataset = smalldataset.loc[~smalldataset['name'].isin(test_gals)]
+    print(test_dataset.shape)
+    print(train_dataset.shape)
+  else: #Set A splitting
+    train_dataset = smalldataset.sample(frac=0.8,random_state=0) #Split into training/testing
+    test_dataset = smalldataset.drop(train_dataset.index)
+    
+  test_dataset = test_dataset.drop(columns = 'name') #Hyperas doesn't need gal id
+  train_dataset = train_dataset.drop(columns = 'name') #Hyperas doesn't need gal id
+
 
   train_labels = train_dataset.pop("age")#Separate labels
   test_labels = test_dataset.pop("age")
